@@ -1,3 +1,16 @@
+import  logging
+
+DEBUG = True
+logger = logging.getLogger('root')
+logger.addHandler(logging.StreamHandler())
+
+if DEBUG:
+    logger.setLevel(logging.INFO)
+    logger.info("====== debug logging on =====")
+
+
+
+ELEMENT = 'cvs'
 
 class Sketch:
 
@@ -6,16 +19,16 @@ class Sketch:
 
         p.setup = self.setup
         p.draw = self.draw
-#def sketch(p):
+
     def setup(self):
-        cvs = document.getElementById('cvs')
+        cvs = document.getElementById(ELEMENT)
         w = cvs.offsetWidth
         h = w /2
         my_canvas =  self.p.createCanvas(w, h)
         self.p.background(0)
         self.p.rectMode(self.p.CENTER)
-        my_canvas.parent('cvs')
-        print ("setup ran")
+        my_canvas.parent(ELEMENT)
+        logging.info("setup complete")
 
 
     def draw(self):
@@ -26,8 +39,8 @@ class Sketch:
 
 
     @staticmethod
-    def create():
-        return __new__ (window.p5(Sketch))
+    def create(element):
+        return __new__ (window.p5(Sketch, element))
 
 
 sketch = Sketch.create()
