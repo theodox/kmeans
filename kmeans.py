@@ -24,5 +24,10 @@ class Sketch:
         self.p.ellipse(self.p.mouseX, self.p.mouseY, 50, 50)
 
 
-p5 = __new__ (window.p5(Sketch))
-print(p5)
+
+    @staticmethod
+    def create():
+        return __new__ (window.p5(Sketch))
+
+
+sketch = Sketch.create()
